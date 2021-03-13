@@ -20,12 +20,12 @@ import com.dorian.apirest.doriannewsbackend.entity.Customer;
 public class CustomerServiceImpl implements UserDetailsService{
 
 	@Autowired
-	private CustomerRepository userRepository;
+	private CustomerRepository customerRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String theCostumername) throws UsernameNotFoundException {
 		
-		Customer theCustomer = userRepository.findByCustomerName(theCostumername);
+		Customer theCustomer = customerRepository.findByCustomerName(theCostumername);
 		
 		// This is a user from spring security
 		if(theCustomer == null) {
@@ -60,4 +60,14 @@ public class CustomerServiceImpl implements UserDetailsService{
 	}
 	
 	
+	public boolean existsByCustomerName(String customerName) {
+		
+		return customerRepository.existsByCustomerName(customerName);
+		
+	}
+	
+	public void save(Customer theCustomer) {
+		
+		customerRepository.save(theCustomer);
+	}
 }

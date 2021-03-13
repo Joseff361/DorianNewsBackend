@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user")
+@Table(name = "customer")
 public class Customer {
 
 	@Id
@@ -19,15 +19,16 @@ public class Customer {
 	@Column(name = "customer_name")
 	private String customerName;
 
+	@Column(name = "password")
+	private String password;
+	
 	@Column(name = "name")
 	private String name;
 	
 	@Column(name = "last_name")
 	private String lastName;
 	
-	@Column(name = "password")
-	private String password;
-	
+
 	/*
 	@Column(name = "role")
 	private byte role;
@@ -37,8 +38,7 @@ public class Customer {
 		
 	}
 
-	public Customer(String customerName, String name, String lastName, String password) {
-		super();
+	public Customer(String customerName, String password, String name, String lastName) {
 		this.customerName = customerName;
 		this.name = name;
 		this.lastName = lastName;

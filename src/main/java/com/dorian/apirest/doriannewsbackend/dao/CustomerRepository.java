@@ -9,5 +9,7 @@ import com.dorian.apirest.doriannewsbackend.entity.Customer;
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	
 	public Customer findByCustomerName(String costumerName);
+	
+	boolean existsByCustomerName(String customerName);
 
 }
