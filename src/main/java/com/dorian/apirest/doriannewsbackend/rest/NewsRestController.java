@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dorian.apirest.doriannewsbackend.entity.Message;
 import com.dorian.apirest.doriannewsbackend.entity.News;
 import com.dorian.apirest.doriannewsbackend.security.JwtProvider;
 import com.dorian.apirest.doriannewsbackend.service.CustomerServiceImpl;
@@ -88,7 +89,7 @@ public class NewsRestController {
 	*/
 	
 	@DeleteMapping("/news/{theId}")
-	public String deleteNews(@PathVariable int theId, HttpServletRequest request) {
+	public ResponseEntity<?> deleteNews(@PathVariable int theId, HttpServletRequest request) {
 		
 		
 		String theToken = getTokenFromHeaderRequest(request);
@@ -103,8 +104,9 @@ public class NewsRestController {
 		
 		newsService.deleteById(theId);
 		
-		return "Deleted new id - " + theId;
+		return new ResponseEntity<>(new Message("Deleted new id - " + theId), HttpStatus.OK);
 	}
+	
 	
 	private String getTokenFromHeaderRequest(HttpServletRequest request){
 		
