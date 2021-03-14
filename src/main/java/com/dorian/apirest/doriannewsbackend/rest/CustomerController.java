@@ -25,15 +25,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dorian.apirest.doriannewsbackend.entity.Customer;
 import com.dorian.apirest.doriannewsbackend.entity.JwtDto;
 import com.dorian.apirest.doriannewsbackend.entity.LoginCustomer;
+import com.dorian.apirest.doriannewsbackend.entity.Message;
 import com.dorian.apirest.doriannewsbackend.security.JwtProvider;
 import com.dorian.apirest.doriannewsbackend.service.CustomerServiceImpl;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 public class CustomerController {
 
-	@Autowired
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -52,13 +53,13 @@ public class CustomerController {
     	
         if(bindingResult.hasErrors()) {
         	
-            return new ResponseEntity<>("Malformed form", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Message("Malformed form"), HttpStatus.BAD_REQUEST);
         	
         }
         
         if(customerServiceImpl.existsByCustomerName(theCustomer.getCustomerName())){
         	
-        	return new ResponseEntity<>("Customer Name already exists", HttpStatus.BAD_REQUEST);
+        	return new ResponseEntity<>(new Message("Customer Name already exists"), HttpStatus.BAD_REQUEST);
         	
         }
             
@@ -70,7 +71,7 @@ public class CustomerController {
         
         customerServiceImpl.save(customerToSave);
         
-        return new ResponseEntity<>("Customer saved to BBDD", HttpStatus.CREATED);
+        return new ResponseEntity<>(new Message("Customer saved to BBDD"), HttpStatus.OK);
         
     }
     
@@ -80,7 +81,7 @@ public class CustomerController {
        
     	if(bindingResult.hasErrors()) {
     		
-            return new ResponseEntity("Malformed form", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Message("Malformed form"), HttpStatus.BAD_REQUEST);
     		
     	}
     	

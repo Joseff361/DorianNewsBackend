@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dorian.apirest.doriannewsbackend.dao.NewsRepository;
+import com.dorian.apirest.doriannewsbackend.entity.Customer;
 import com.dorian.apirest.doriannewsbackend.entity.News;
 
 @Service
@@ -47,6 +48,18 @@ public class NewsServiceImpl implements NewsService{
 		
 		newsRepository.deleteById(id);
 		
+	}
+
+	@Override
+	public List<News> findByCustomer(Customer theCustomer) {
+	
+		return newsRepository.findByCustomer(theCustomer);
+	}
+
+	@Override
+	public News findByCustomerAndId(Customer theCustomer, int theId) {
+	
+		return newsRepository.findByCustomerAndId(theCustomer, theId);
 	}
 
 }

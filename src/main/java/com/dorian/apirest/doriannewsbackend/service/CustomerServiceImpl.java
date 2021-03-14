@@ -3,6 +3,7 @@ package com.dorian.apirest.doriannewsbackend.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,14 +24,14 @@ public class CustomerServiceImpl implements UserDetailsService{
 	private CustomerRepository customerRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String theCostumername) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String theCustomername) throws UsernameNotFoundException {
 		
-		Customer theCustomer = customerRepository.findByCustomerName(theCostumername);
+		Customer theCustomer = customerRepository.findByCustomerName(theCustomername);
 		
 		// This is a user from spring security
 		if(theCustomer == null) {
 			
-			throw new UsernameNotFoundException("User " + theCostumername + " not found");
+			throw new UsernameNotFoundException("User " + theCustomername + " not found");
 			
 		}else {
 			
@@ -69,5 +70,16 @@ public class CustomerServiceImpl implements UserDetailsService{
 	public void save(Customer theCustomer) {
 		
 		customerRepository.save(theCustomer);
+	}
+	
+	public Optional<Customer> getUserById(int theCustomerId) {
+		
+		return customerRepository.findById(theCustomerId);
+	}
+	
+	public Customer findByCustomerName(String theCustomerName) {
+		
+		return customerRepository.findByCustomerName(theCustomerName);
+		
 	}
 }
