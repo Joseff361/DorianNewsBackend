@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable() 
 			.authorizeRequests()
-	        .antMatchers("/auth/**").permitAll() // /auth/login & /auth/signin
+	        .antMatchers("/", "/auth/**").permitAll() // /auth/login & /auth/signin
 	        .anyRequest().authenticated() // only for the previous path you don't need to be authenticated
 	        .and()
 	        .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
