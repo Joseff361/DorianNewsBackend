@@ -24,7 +24,7 @@ import com.dorian.apirest.doriannewsbackend.service.CustomerServiceImpl;
 import com.dorian.apirest.doriannewsbackend.service.NewsService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.DELETE})
 @RequestMapping("/api")
 @PreAuthorize("authenticated") // Allow authenticaded users no matter what type of rule it has
 public class NewsRestController {
